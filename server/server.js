@@ -2,25 +2,25 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3000;
+const middleware = require('./middleware/middleware.js');
 
 app.use(express.json());
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-  res.status(200).render('./../client/signup');
+  res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-app.get('/login', middleware.login, (req, res) => {
-  res.status(200).redirect('/login');
-})
-
-app.post('/signup', middleware.signup, (req, res) => {
-  res.status(200).redirect('/signup');
+app.post('/login', middleware.getlogin, (res, req) => {
+  res.status(200).send('login successful!');
 });
 
-app.get('/results', middleware.results, (req, res) => {
-  res.status(200).redirect('/results')
+app.post('/signup', middleware.createSignup, (res, req) => {
+  res.status(200).send('signup successful!');
 });
+
+app.get('/results', middleware.results); 
+
 
 
 //main page  -- two buttons to direct to sign up /log in
