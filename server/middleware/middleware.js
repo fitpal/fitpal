@@ -43,19 +43,18 @@ getlogin(req, res, next) {
   },
 
 
-// getResults(req, res, next) {
-  
-}
+getResults(req, res, next) {
+  const { username, password, zipcode, contacts, workoutType, availability } = req.body;
+  if (!req.body) return res.send('no req');
+  Partner.find({zipcode: zipcode, workoutType: workoutType, availability: availability}, ((err, partners) => {
+    if(err || partners.length === 0) {
+      res.status(500).send('Failed to find any partners');
+    }else {
+      res.status(200).send(partners[0]);
+    } 
+  })
+)}
 
-
-// controller.results = (req, res, next) => {
-//     // Student.find({firstName: req.params.name}, function (err, students){
-//     //     if (err || student.length === 0){
-//     //       res.status(500).send('Failed to find student');
-//     //     }else{
-//           //
-// }
-
-
+};
 
 module.exports = controller;

@@ -3,9 +3,15 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://sarachang:<fitpal123>@fitpal-nqjaq.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
