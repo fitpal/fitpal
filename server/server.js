@@ -5,7 +5,7 @@ const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true}));
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
