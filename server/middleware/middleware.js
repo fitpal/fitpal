@@ -1,19 +1,33 @@
-const User = require('../models/models.js');
+const Partner = require('../models/models.js');
 const controller = {
 
-createSignup(req, res, next) {
-    const { username, password, zipcode, contacts, workoutType, availability } = req.body;
-    if (!req.body) return res.send('no req');
-    Signup.create({username: username, password: password, zipcode: zipcode, contacts: contacts, workoutType: workoutType, availability: availability}, (err, data) => {
-    if (err) return res.status(418).send('Failed to create account');
-    });
-    return next();
-  },
+createSignup(req, res) {
+      const { username, password, zipcode, contactEmail, workoutType, availability } = req.body;
+      console.log('look BODY', req.body)
+      Partner.create({
+        username: username, 
+        password: password, 
+        zipcode: zipcode, 
+        contactEmail: contactEmail, 
+        workoutType: workoutType, 
+        availability: availability}, 
+        (err, partner) => {
+        if (err){
+          console.log('hit')
+          res.status(418).send('Failed to signup');
+        }else{
+          console.log('hit2')
+          res.status(200).send(partner)
+        }
+      })
+},
+
+
 
 
 getlogin(req, res, next) {
   const { username, password } = req.body;
-  Partner.findOne({ username, password }, (err, user) => {
+  Partner.findAll({ username, password }, (err, user) => {
     if (err){
         //database error
       return next('Error in middleware.getLogin: '+JSON.stringify(err));
@@ -46,11 +60,11 @@ getlogin(req, res, next) {
 getResults(req, res, next) {
   const { username, password, zipcode, contacts, workoutType, availability } = req.body;
   if (!req.body) return res.send('no req');
-  Partner.find({zipcode: zipcode, workoutType: workoutType, availability: availability}, ((err, partners) => {
-    if(err || partners.length === 0) {
-      res.status(500).send('Failed to find any partners');
+  Partner.findAll({zipcode: zipcode, workoutType: workoutType, availability: availability}, ((err, partners) => {
+    if(err) {
+      res.status(418).send('Failed to find any partners');
     }else {
-      res.status(200).send(partners[0]);
+      res.status(200).send(partners);
     } 
   })
 )}
