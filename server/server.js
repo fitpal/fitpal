@@ -5,7 +5,7 @@ const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://sarachang:<fitpal123>@fitpal-nqjaq.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://sarachang:fitpal123@fitpal-nqjaq.mongodb.net/fitpal?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
@@ -17,15 +17,17 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-app.post('/login', middleware.getlogin, (res, req) => {
-  res.status(200).send('login successful!');
-});
-
 app.post('/signup', middleware.createSignup, (res, req) => {
   res.status(200).send('signup successful!');
 });
 
-app.get('/results', middleware.results); 
+app.post('/login', middleware.getlogin, (res, req) => {
+  res.status(200).send('login successful!');
+});
+
+app.get('/results', middleware.getResults, (res, req) => {
+  res.status(200).send('results sent!')
+}); 
 
 
 
