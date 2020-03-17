@@ -26,11 +26,15 @@ module.exports = {
                 use: [
                     'style-loader',
                     // Translates CSS into CommonJS
-                    'css-loader',
+                    'css-loader?sourceMap',
                     // Compiles Sass to CSS
-                    'sass-loader',
+                    'sass-loader?sourceMap'
                 ],
-            }
+            },
+            { 
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader' 
+             }
           
         ],
     }, 
