@@ -27,6 +27,7 @@
     "nodemon": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {

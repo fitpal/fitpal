@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3000;
+const middleware = require('./middleware/middleware.js');
 
 app.use(express.json());
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-  res.status(200).render('./../client/signup');
+  res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
 app.get('/login', middleware.login, (req, res) => {
