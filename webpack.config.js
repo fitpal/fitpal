@@ -44,10 +44,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'client'),
         port: 8080,
         proxy: {
-            '/api' : {
-              target: "http://localhost:3000",
-              pathRewrite: {'^/api' : ''}
-          }
+            '/api': 'http://localhost:3000' 
         }
     }
 }
