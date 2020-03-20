@@ -13,7 +13,7 @@ const schemaModel = new Schema({
   availability: {type: String, required: [true, 'availability is required']},
 });
 
-schemaModel.pre('create', async function (next){
+schemaModel.pre('save', async function (next){
   //within this context, 'this' refers to the dwavocument about to be saved
   //in our case, it should have properties username and password
   const user = this;
