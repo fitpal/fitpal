@@ -12,7 +12,7 @@ class Landing extends Component {
             <div className="row">
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">FitPal</h1>
-                <p className="lead"> made by Team Goblin Shark</p>
+                <p className="lead"> created by Team Goblin Shark</p>
                 <hr />
                 <Link to="/login" className="btn btn-lg btn-dark mr-2">
                   Login

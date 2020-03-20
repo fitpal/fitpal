@@ -70,7 +70,7 @@ getResults: (req, res, next) =>{
     console.log('no partners')
     res.status(418).send('Failed to find any partners');
   } else {
-  res.status(200).send(partners);
+      res.locals.partners = partners;
       return next();
     } 
   })
