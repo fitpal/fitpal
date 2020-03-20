@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 //import routes
-import Landing from './components/Landing';
-import Login from './components/Login';
+import Landing from './components/Landing.jsx';
+import Result from './components/Result/Result.jsx'
+
 
 
 //css
@@ -17,7 +18,7 @@ class App extends Component {
         return ( 
             <Router>
                 <div className="App">
-                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/" component={Result} />
                 </div>
             </Router>
         );
