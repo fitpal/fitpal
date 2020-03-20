@@ -14,10 +14,13 @@ class Result extends Component {
         }
     }
     componentDidMount(){
-        axois.get('/results')
-        .then(res => {
-            console.log(hey)
-        })
+        fetch('/results')
+            .then(response => response.json())
+            .then(dataBack => {
+                this.setState({ tweets: dataBack })
+            })
+            console.log(this.state.users)
+            .catch(err => console.log(err))
     }
     render() {
         return ( 
