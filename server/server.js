@@ -3,25 +3,32 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://sarachang:fitpal123@fitpal-nqjaq.mongodb.net/fitpal?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true}));
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-app.get('/login', middleware.login, (req, res) => {
-  res.status(200).redirect('/login');
-})
-
-app.post('/signup', middleware.signup, (req, res) => {
-  res.status(200).redirect('/signup');
+app.post('/signup', middleware.createSignup, (res, req) => {
+  res.status(200).send('signup successful!');
 });
 
-app.get('/results', middleware.results, (req, res) => {
-  res.status(200).redirect('/results')
+app.post('/api/login', middleware.getlogin, (res, req) => {
+  res.status(200).send(res.locals.user);
 });
+
+app.get('/results', middleware.getResults, (res, req) => {
+  res.status(200).json(res.locals.partners)
+}); 
+
 
 
 //main page  -- two buttons to direct to sign up /log in

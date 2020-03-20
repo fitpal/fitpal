@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css'
 
+import "../Signup.scss" 
 
 
 class Signup extends Component {
@@ -15,7 +15,7 @@ class Signup extends Component {
               <label><input type="text" name="contacts" placeholder="Contact Info" /></label>
               <label><input type="text" name="workoutType" placeholder="Workout Type" /></label>
               <label><input type="text" name="availability" placeholder="Availability" /></label>
-              <button class="send">SEND</button>
+              <button className="send">SEND</button>
             </form>
           </div>
       )

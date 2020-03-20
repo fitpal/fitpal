@@ -26,11 +26,15 @@ module.exports = {
                 use: [
                     'style-loader',
                     // Translates CSS into CommonJS
-                    'css-loader',
+                    'css-loader?sourceMap',
                     // Compiles Sass to CSS
-                    'sass-loader',
+                    'sass-loader?sourceMap'
                 ],
-            }
+            },
+            { 
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader' 
+             }
           
         ],
     }, 
@@ -40,8 +44,7 @@ module.exports = {
         contentBase: path.join(__dirname, 'client'),
         port: 8080,
         proxy: {
-            '/': 'http://localhost:3000'
+            '/api': 'http://localhost:3000' 
         }
-        
     }
 }
