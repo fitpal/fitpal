@@ -18,27 +18,28 @@ class Login extends Component {
       username, 
       password 
     }
-      // axios.post('/api/login', { user })
-      //   .then(res => {
-      //     console.log('hello')
-      //     console.log(res.data)
-      //   })
-      //   .catch(error => {
-      //     console.log(error.response)
-      //   })
 
-      fetch('/api/login', { 
-        method: 'post', 
-        headers: {
-          'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(user)
-      }) 
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        console.log('hi')
-      })
+      axios.post('/api/login', user)
+        .then(res => {
+          console.log('hello')
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+
+      // fetch('/api/login', { 
+      //   method: 'post', 
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   }, 
+      //   body: JSON.stringify(user)
+      // })
+      // .then(response => {
+      //   response.json().then(body =>
+      //     console.log(body)
+      //   )
+      // })
   }
 
   render() {

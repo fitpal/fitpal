@@ -13,23 +13,22 @@ class Result extends Component {
             users: [],
         }
     }
-    componentDidMount(){
-        fetch('/results')
-            .then(response => response.json())
-            .then(dataBack => {
-                this.setState({ tweets: dataBack })
-            })
-            console.log(this.state.users)
-            .catch(err => console.log(err))
-    }
+    
+    // componentDidMount(){
+    //     fetch('/results')
+    //         .then(response => response.json())
+    //         .then(dataBack => {
+    //             this.setState({ tweets: dataBack })
+    //         })
+    //         console.log(this.state.users)
+    //         .catch(err => console.log(err))
+    // }
     render() {
         return ( 
-            <Router>
-                <div className="results">
-                    <NavBar />
-                    hey
-                </div>
-            </Router>
+            <div className="results">
+                <NavBar />
+                hey
+            </div>
         );
     }
 }
