@@ -20,7 +20,7 @@ createSignup(req, res) {
           res.status(418).send('Failed to signup');
         }else{
           console.log('hit2')
-          res.status(200).send(partner)
+          res.status(200)
         }
       })
 },
@@ -41,12 +41,12 @@ getlogin: async (req, res, next) =>{
     .then(result => {
       if (!result) {
         console.log('password does not match');
+        return next()
       }else{
         //user was found, compare the password to the hased one
         console.log('user was found')
         res.locals.user = user;
         return next();
-        //password did match, save user for following middlewares
         }  
       })
     }     
@@ -67,13 +67,14 @@ getResults: (req, res, next) =>{
 //if }) after availability: availability, you'd have to use async await, because there's no CB
   Partner.find({zipcode: zipcode, workoutType: workoutType, availability: availability}, function (err, partners){
   if(err){
-    console.log('no partners')
-    res.status(418).send('Failed to find any partners');
-  } else {
-      res.locals.partners = partners;
-      return next();
-    } 
-  })
+    return next({
+      log: "no partners",
+      err: { err }
+    });
+  }
+   res.locals.partners = partners
+   return next(); 
+  });
 }
 };
 

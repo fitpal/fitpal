@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axois from 'axios';
 
 
@@ -13,23 +12,21 @@ class Result extends Component {
             users: [],
         }
     }
+    
     componentDidMount(){
-        fetch('/results')
+        fetch('/api/results')
             .then(response => response.json())
             .then(dataBack => {
-                this.setState({ tweets: dataBack })
+                this.setState({ users: dataBack })
             })
-            console.log(this.state.users)
             .catch(err => console.log(err))
     }
     render() {
         return ( 
-            <Router>
-                <div className="results">
-                    <NavBar />
-                    hey
-                </div>
-            </Router>
+            <div className="results">
+                <NavBar />
+                hey
+            </div>
         );
     }
 }

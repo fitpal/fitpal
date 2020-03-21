@@ -6,24 +6,21 @@
   height: 100vh;
   margin-top: -24px;
   margin-bottom: -50px;
+
+  .landing-inner {
+    padding-top: 265px;
+    color: rgb(241, 240, 240);
+  }
+  
+  .landing h1 {
+    text-shadow: 4px 3px 3px #2c2c2cc2;
+  }
+  
+  .landing p {
+    text-shadow: 4px 3px 3px #2c2c2cc2;
+  }
+  
 } 
-
-img {
-  width: 100%;
-} 
-
-.landing-inner {
-  padding-top: 265px;
-  color: rgb(241, 240, 240);
-}
-
-.landing h1 {
-  text-shadow: 4px 3px 3px #2c2c2cc2;
-}
-
-.landing p {
-  text-shadow: 4px 3px 3px #2c2c2cc2;
-}
 
 .dark-overlay {
   background-color: rgba(0, 0, 0, 0.2);
