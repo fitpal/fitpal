@@ -67,13 +67,14 @@ getResults: (req, res, next) =>{
 //if }) after availability: availability, you'd have to use async await, because there's no CB
   Partner.find({zipcode: zipcode, workoutType: workoutType, availability: availability}, function (err, partners){
   if(err){
-    console.log('no partners')
-    res.status(418).send('Failed to find any partners');
-  } else {
-      res.locals.partners = partners;
-      return next();
-    } 
-  })
+    return next({
+      log: "no partners",
+      err: { err }
+    });
+  }
+   res.locals.partners = partners
+   return next(); 
+  });
 }
 };
 

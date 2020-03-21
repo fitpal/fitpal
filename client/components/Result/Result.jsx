@@ -17,19 +17,16 @@ class Result extends Component {
         fetch('/results')
             .then(response => response.json())
             .then(dataBack => {
-                this.setState({ tweets: dataBack })
+                this.setState({ users: dataBack })
             })
-            console.log(this.state.users)
             .catch(err => console.log(err))
     }
     render() {
         return ( 
-            <Router>
                 <div className="results">
                     <NavBar />
                     hey
                 </div>
-            </Router>
         );
     }
 }
