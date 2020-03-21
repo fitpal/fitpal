@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
+const sessionController = require('./middleware/sessionController.js')
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb+srv://sun:baby@cluster0-cnxmy.mongodb.net/Fitpal?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,11 +29,12 @@ app.post('/api/login', middleware.getlogin, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 
-app.get('/api/results', middleware.getResults, (req, res) => {
-  console.log('this is', res.locals.partners)
+//if you are not authenticated, you will get error and not pass to next middleware function which is getResults
+//JWOT allows you to recover the user obj
+app.get('/results', sessionController.authenticate, middleware.getResults, (req, res) => {
+  console.log("res works", res.locals.partners);
   res.status(200).send('results sent!')
 }); 
-
 
 
 //main page  -- two buttons to direct to sign up /log in
