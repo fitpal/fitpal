@@ -20,7 +20,7 @@ createSignup(req, res) {
           res.status(418).send('Failed to signup');
         }else{
           console.log('hit2')
-          res.status(200).send(partner)
+          res.status(200)
         }
       })
 },
