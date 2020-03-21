@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import axois from 'axios';
 
 
@@ -13,8 +12,9 @@ class Result extends Component {
             users: [],
         }
     }
+    
     componentDidMount(){
-        fetch('/results')
+        fetch('/api/results')
             .then(response => response.json())
             .then(dataBack => {
                 this.setState({ users: dataBack })
@@ -23,10 +23,10 @@ class Result extends Component {
     }
     render() {
         return ( 
-                <div className="results">
-                    <NavBar />
-                    hey
-                </div>
+            <div className="results">
+                <NavBar />
+                hey
+            </div>
         );
     }
 }

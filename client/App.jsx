@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import routes
 import Landing from './components/Landing.jsx';
 import Result from './components/Result/Result.jsx'
+import Login from './components/Login/Login.jsx';
+import Signup from './components/Signup/Signup.jsx';
 
 
 
@@ -16,11 +18,13 @@ class App extends Component {
 
     render() {
         return ( 
-            <Router>
-                <div className="App">
-                    <Route exact path="/" component={Result} />
-                </div>
-            </Router>
+            <div className="App">
+                <Router>
+                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signup" component={Signup} />
+                </Router>
+            </div>
         );
     }
 }
