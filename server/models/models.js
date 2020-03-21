@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-
+const { JWT_KEY } = require('../misc/keys.js');
+const jwt = require('jsonwebtoken');
+ 
 const schemaModel = new Schema({
   username: {type: String, required: [true, 'username is required']},
   password: {type: String, required: [true, 'password is required']},
@@ -11,6 +13,12 @@ const schemaModel = new Schema({
   contactEmail: {type: String, required: [true, 'email is required']},
   workoutType: {type: String, required: [true, 'workout type is required']},
   availability: {type: String, required: [true, 'availability is required']},
+  tokens: [{
+    token:{
+      type: String,
+      required: true
+    }
+  }]
 });
 
 schemaModel.pre('save', async function (next){
@@ -29,6 +37,15 @@ schemaModel.pre('save', async function (next){
   //   return next;
   // })
 });
+
+
+schemaModel.methods.generateAuthToken = async function(){
+  const user = this
+  const token = jwt.sign({_id: user._id}, JWT_KEY)
+    user.tokens = user.tokens.concat({token})
+    await user.save()
+    return token;
+}
 
 const Partner = mongoose.model('users', schemaModel);
 

@@ -14,13 +14,14 @@ createSignup(req, res) {
         contactEmail: contactEmail, 
         workoutType: workoutType, 
         availability: availability}, 
-        (err, partner) => {
+        async (err, partner) => {
         if (err){
           console.log('hit')
           res.status(418).send('Failed to signup');
         }else{
           console.log('hit2')
-          res.status(200).send(partner)
+          const token = await partner.generateAuthToken()
+          res.status(200).send({partner, token})
         }
       })
 },
@@ -38,13 +39,15 @@ getlogin: async (req, res, next) =>{
     return res.status(401).send({error: 'Login failed! Check authentication credentials'})
   }else {
     bcrypt.compare(password, user.password)
-    .then(result => {
+    .then (async result => {
       if (!result) {
         console.log('password does not match');
       }else{
         //user was found, compare the password to the hased one
         console.log('user was found')
+        const token = await user.generateAuthToken()
         res.locals.user = user;
+        res.locals.token = token;
         return next();
         //password did match, save user for following middlewares
         }  

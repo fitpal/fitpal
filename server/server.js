@@ -3,9 +3,10 @@ const app = express();
 const path = require('path');
 const PORT = 3000;
 const middleware = require('./middleware/middleware.js');
+const sessionController = require('./middleware/sessionController.js')
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://sun:baby@cluster0-cnxmy.mongodb.net/Fitpal?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://sarachang:fitpal123@fitpal-nqjaq.mongodb.net/fitpal?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('Connected to Database');
 });
@@ -28,7 +29,8 @@ app.post('/login', middleware.getlogin, (req, res) => {
   res.status(200).send('login successful!');
 });
 
-app.get('/results', middleware.getResults, (req, res) => {
+app.get('/results', sessionController.authenticate, middleware.getResults, (req, res) => {
+  console.log('res works!', res.locals.partners)
   res.status(200).send('results sent!')
 }); 
 
