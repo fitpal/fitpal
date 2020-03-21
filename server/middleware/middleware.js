@@ -42,6 +42,7 @@ getlogin: async (req, res, next) =>{
     .then(async result => {
       if (!result) {
         console.log('password does not match');
+        return next()
       }else{
         //user was found, compare the password to the hased one
         console.log('user was found')
@@ -49,7 +50,6 @@ getlogin: async (req, res, next) =>{
         res.locals.user = user;
         res.locals.token = token;
         return next();
-        //password did match, save user for following middlewares
         }  
       })
     }     

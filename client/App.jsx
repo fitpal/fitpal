@@ -4,8 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 //import routes
-import Landing from './components/Landing';
-import Login from './components/Login';
+import Landing from './components/Landing.jsx';
+import Result from './components/Result/Result.jsx'
+import Login from './components/Login/Login.jsx';
+import Signup from './components/Signup/Signup.jsx';
+
 
 
 //css
@@ -15,11 +18,13 @@ class App extends Component {
 
     render() {
         return ( 
-            <Router>
-                <div className="App">
+            <div className="App">
+                <Router>
                     <Route exact path="/" component={Landing} />
-                </div>
-            </Router>
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/signup" component={Signup} />
+                </Router>
+            </div>
         );
     }
 }

@@ -1,0 +1,46 @@
+.signup{
+    position: relative;
+    background: url("../../img/signup.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: -24px;
+    margin-bottom: -50px;
+
+
+    .signup-inner{
+        padding-top: 30px;
+        color: rgb(241, 240, 240);
+    }
+
+    .signup-h1{
+        text-align: center;
+        text-shadow: 4px 3px 3px #2c2c2cc2
+    }
+
+    .signup-row{
+        margin: auto;
+    }
+
+    .form-group{
+        text-align: center;
+        text-shadow: 4px 3px 3px #2c2c2cc2
+    }
+    
+    .form-control{
+        width: 50%;
+        margin: auto;
+    }
+    
+}
+
+.darkoverlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+  
