@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import axois from 'axios';
+import axois from 'axios';
 
 
 //import Navbar
@@ -13,23 +12,21 @@ class Result extends Component {
             users: [],
         }
     }
-    // componentDidMount(){
-    //     fetch('/results')
-    //         .then(response => response.json())
-    //         .then(dataBack => {
-    //             this.setState({ tweets: dataBack })
-    //         })
-    //         console.log(this.state.users)
-    //         .catch(err => console.log(err))
-    // }
+    
+    componentDidMount(){
+        fetch('/api/results')
+            .then(response => response.json())
+            .then(dataBack => {
+                this.setState({ users: dataBack })
+            })
+            .catch(err => console.log(err))
+    }
     render() {
         return ( 
-            <Router>
-                <div className="results">
-                    <NavBar />
-                    hey
-                </div>
-            </Router>
+            <div className="results">
+                <NavBar />
+                hey
+            </div>
         );
     }
 }

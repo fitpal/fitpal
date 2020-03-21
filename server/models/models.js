@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
-const { JWT_KEY } = require('../misc/keys.js');
+const {JWT_KEY} = require('../misc/keys.js');
 const jwt = require('jsonwebtoken');
- 
+
 const schemaModel = new Schema({
   username: {type: String, required: [true, 'username is required']},
   password: {type: String, required: [true, 'password is required']},
@@ -22,7 +22,7 @@ const schemaModel = new Schema({
 });
 
 schemaModel.pre('save', async function (next){
-  //within this context, 'this' refers to the dwavocument about to be saved
+  //within this context, 'this' refers to the document about to be saved
   //in our case, it should have properties username and password
   const user = this;
   if (user.isModified('password')) {
@@ -38,13 +38,12 @@ schemaModel.pre('save', async function (next){
   // })
 });
 
-
 schemaModel.methods.generateAuthToken = async function(){
   const user = this
   const token = jwt.sign({_id: user._id}, JWT_KEY)
-    user.tokens = user.tokens.concat({token})
-    await user.save()
-    return token;
+  user.tokens = user.tokens.concat({token})
+  await user.save()
+  return token
 }
 
 const Partner = mongoose.model('users', schemaModel);

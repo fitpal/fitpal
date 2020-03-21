@@ -18,22 +18,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/index.html'));
 });
 
-app.post('/signup', middleware.createSignup, (req, res) => {
+app.post('/api/signup', middleware.createSignup, (req, res) => {
   res.status(200).send('signup successful!');
 });
 //whenever you send, you end the chain of middlewares, you need to do .next in createSignup
 // or have .send('signup successful)in middleware.createSignup
 
-app.post('/login', middleware.getlogin, (req, res) => {
+app.post('/api/login', middleware.getlogin, (req, res) => {
   console.log(res);
-  res.status(200).send('login successful!');
+  res.status(200).json(res.locals.user);
 });
 
+//if you are not authenticated, you will get error and not pass to next middleware function which is getResults
+//JWOT allows you to recover the user obj
 app.get('/results', sessionController.authenticate, middleware.getResults, (req, res) => {
-  console.log('res works!', res.locals.partners)
+  console.log("res works", res.locals.partners);
   res.status(200).send('results sent!')
 }); 
-
 
 
 //main page  -- two buttons to direct to sign up /log in
