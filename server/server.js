@@ -30,7 +30,7 @@ app.post('/login', middleware.getlogin, (req, res) => {
 
 app.get('/results', middleware.getResults, (req, res) => {
   console.log('this is', res.locals.partners)
-  res.status(200).json(res.locals.partners)
+  res.status(200).send('results sent!')
 }); 
 
 
