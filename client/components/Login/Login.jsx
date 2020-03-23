@@ -30,14 +30,17 @@ class Login extends Component {
     }
 
     axios.post('/api/login', user)
-    .then(res => {
-      if(res.data.tokens){
-        this.setState( { isLoggedIn: true })
-      }
-    })
-    .catch(error => {
-      console.log(error.response)
-    })
+      .then(res => {
+        console.log('hello')
+        console.log(res)
+        // At this point, we have a token from the backend.
+        // Let's set the client's state to include the token
+        // So that we can pass it to the /api/results request later on.
+        this.props.action(res)
+      })
+      .catch(error => {
+        console.log(`THIS IS THE ERROR: ${error.response}`)
+      })
 
       // fetch('/api/login', { 
       //   method: 'post', 

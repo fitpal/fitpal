@@ -18,10 +18,12 @@ createSignup: (req, res) =>{
         if (err){
           console.log('hit')
           res.status(418).send('Failed to signup');
+          
         }else{
           console.log('hit2')
           const token = await partner.generateAuthToken() 
           res.status(200).send({partner, token})
+          
         }
       })
 },
