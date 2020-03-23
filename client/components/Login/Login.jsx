@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
+
 
 //SCSS Import
 import './Login.scss';
@@ -7,6 +9,9 @@ import './Login.scss';
 class Login extends Component {
   constructor(props) {
     super(props) 
+    this.state = {
+      isLoggedIn: false
+    }
     this.handleLogIn = this.handleLogIn.bind(this)
   }
 
@@ -46,7 +51,6 @@ class Login extends Component {
       //   )
       // })
   }
-
   render() {
       return(
           <div className="login">

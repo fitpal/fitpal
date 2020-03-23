@@ -18,8 +18,14 @@ class App extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            jwt: null,
-            jwt1: null,
+            loginJwt: null,
+            loginZipCode: null,
+            loginWorkOutType: null,
+            loginAvailability: null,
+            signUpJwt: null,
+            signUpZipCode: null,
+            signUpWorkOutType: null,
+            signUpAvailability: null,
         }
         this.handler = this.handler.bind(this)
         this.handler1 = this.handler1.bind(this)
@@ -28,7 +34,10 @@ class App extends Component {
     handler(res) {
         console.log('jwt jwt jwt')
         this.setState ({
-            jwt: res.data.tokens[0].token
+            loginJwt: res.data.tokens[0].token,
+            loginZipCode: res.data.zipcode,
+            loginWorkOutType: res.data.workoutType,
+            loginAvailability: res.data.availability
         })
     }
 
@@ -36,8 +45,11 @@ class App extends Component {
         console.log('JWT JWT JWT')
         console.log(res)
         this.setState ({
-            jwt1: res.token
-        })
+            signUpJwt: res.data.token,
+            signUpZipCode: res.data.partner.zipcode,
+            signUpWorkOutType: res.data.partner.workoutType,
+            signUpAvailability: res.data.partner.availability
+        });
     }
   
     // parent (App) state should hold the JWT
@@ -55,12 +67,24 @@ class App extends Component {
                     */}
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/login">
-                        {this.state.jwt !== null ? <Redirect to="/results" /> : <Login action={this.handler} />}
+                        {this.state.loginJwt !== null ? <Redirect to="/results" /> : <Login action={this.handler} />}
                     </Route>
                     <Route exact path="/signup" >
-                        {this.state.jwt1 !== null ? <Redirect to="/results" /> : <Signup action={this.handler1} />}
+                        {this.state.signUpJwt !== null ? <Redirect to="/results" /> : <Signup action={this.handler1} />}
                     </Route>
-                    <Route exact path="/results" component={Result} />
+                    <Route exact path="/results">
+
+                        <Result 
+                            loginToken={this.state.loginJwt} 
+                            loginZip={this.state.loginZipCode}
+                            loginWorkOut={this.state.loginWorkOutType}
+                            loginAvail={this.state.loginAvailability}
+                            signToken={this.state.signUpJwt}
+                            signZip={this.state.signUpZipCode}
+                            signWorkOut={this.state.signUpWorkOutType}
+                            signAvail={this.state.signUpAvailability}
+                        />
+                    </Route>
                 </Router>
             </div>
         );
