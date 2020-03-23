@@ -14,7 +14,7 @@ sessionController.authenticate = async (req, res, next) =>{
 //where XXXXXX is the JWT token
 //replacing Bearer string with nothing, so we just get the token
 try {
-    const token = req.header('Authorization').replace('Bearer ','')
+    const token = req.header('authorization').replace('Bearer ','')
 //will turn the string (in model.js line 43) back into an object
     const data = jwt.verify(token, JWT_KEY)
         const user = await Partner.findOne({_id: data._id, 'tokens.token': token})
@@ -22,9 +22,9 @@ try {
             throw new Error()
         }
         //next middleware will want access to user and token
-        req.user = user
-        req.token = token
-        next()
+        res.locals.user = user
+        res.locals.token = token
+        return next()
     } catch (error) {
         res.status(401).send({error: 'Not authorized to access this resource'})
     }

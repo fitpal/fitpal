@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import axios from 'axios';
 
 
-//Pages import
-import Landing from '../Landing.jsx'
-
 //SCSS Import
 import './Login.scss';
 
@@ -16,7 +13,6 @@ class Login extends Component {
       isLoggedIn: false
     }
     this.handleLogIn = this.handleLogIn.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
 
   handleLogIn(e){
@@ -55,11 +51,6 @@ class Login extends Component {
       //   )
       // })
   }
-
-  handleClick(){
-    {isloggedIn ? <Redirect to="/results" /> : <Landing />}
-  }
-
   render() {
       return(
           <div className="login">
@@ -78,7 +69,7 @@ class Login extends Component {
                         <input type="password" className="form-control form-congrol-lg" name="password"/>
                       </div>
                       <div className="form-group">
-                        <button onSubmit={this.handleClick} className="btn btn-lg btn-dark mr-2">Login</button>
+                        <button className="btn btn-lg btn-dark mr-2">Login</button>
                       </div>
                     </form>
                   </div>
