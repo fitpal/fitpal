@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
+
+
+//Pages import
+import Landing from '../Landing.jsx'
 
 //SCSS Import
 import './Login.scss';
@@ -7,7 +12,11 @@ import './Login.scss';
 class Login extends Component {
   constructor(props) {
     super(props) 
+    this.state = {
+      isLoggedIn: false
+    }
     this.handleLogIn = this.handleLogIn.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleLogIn(e){
@@ -20,14 +29,15 @@ class Login extends Component {
       password 
     }
 
-      axios.post('/api/login', user)
-        .then(res => {
-          console.log('hello')
-          console.log(res.data)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
+    axios.post('/api/login', user)
+    .then(res => {
+      if(res.data.tokens){
+        this.setState( { isLoggedIn: true })
+      }
+    })
+    .catch(error => {
+      console.log(error.response)
+    })
 
       // fetch('/api/login', { 
       //   method: 'post', 
@@ -41,6 +51,10 @@ class Login extends Component {
       //     console.log(body)
       //   )
       // })
+  }
+
+  handleClick(){
+    {isloggedIn ? <Redirect to="/results" /> : <Landing />}
   }
 
   render() {
@@ -61,7 +75,7 @@ class Login extends Component {
                         <input type="password" className="form-control form-congrol-lg" name="password"/>
                       </div>
                       <div className="form-group">
-                        <button className="btn btn-lg btn-dark mr-2">Login</button>
+                        <button onSubmit={this.handleClick} className="btn btn-lg btn-dark mr-2">Login</button>
                       </div>
                     </form>
                   </div>

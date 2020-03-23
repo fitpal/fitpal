@@ -17,12 +17,16 @@ import "./App.scss";
 class App extends Component {
 
     render() {
+
+
         return ( 
             <div className="App">
                 <Router>
+                    
                     <Route exact path="/" component={Landing} />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" component={Result} />
                     <Route exact path="/signup" component={Signup} />
+                    <Route exact path="/results" component={Result} />
                 </Router>
             </div>
         );

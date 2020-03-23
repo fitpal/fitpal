@@ -34,6 +34,7 @@ getlogin: async (req, res, next) =>{
   console.log('req.body', req.body)
   console.log(password)
   const user = await Partner.findOne({username})
+  console.log("this is user:", user)
   if (!user){
     console.log('nouser')
     return res.status(401).send({error: 'Login failed! Check authentication credentials'})
@@ -48,7 +49,6 @@ getlogin: async (req, res, next) =>{
         console.log('user was found')
         const token = await user.generateAuthToken() 
         res.locals.user = user;
-        res.locals.token = token;
         return next();
         }  
       })

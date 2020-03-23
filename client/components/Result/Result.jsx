@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axois from 'axios';
+import axios from 'axios';
 
 
 //import Navbar
@@ -13,11 +13,20 @@ class Result extends Component {
         }
     }
     
+    // componentDidMount() {
+    //     axios.get('/api/results')
+    //       .then(res => {
+    //           console.log("HELLOOOO")
+              
+    //       })
+    //   }
     componentDidMount(){
         fetch('/api/results')
             .then(response => response.json())
             .then(dataBack => {
+                console.log("does this go through")
                 this.setState({ users: dataBack })
+                console.log(dataBack)
             })
             .catch(err => console.log(err))
     }
