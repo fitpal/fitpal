@@ -77,7 +77,24 @@ getResults: (req, res, next) =>{
       return next();
     } 
   })
-}
+}, 
+
+logout: async (req, res) =>{
+  try {
+ //when we log out we want to remove that token 
+ //get all the tokens not equal to one in the request
+  req.user.tokens = req.user.tokens.filter((token) => {
+    return token.token != req.token
+  });
+   await req.user.save()
+   res.send()
+  } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+};
+
+
 };
 
 module.exports = controller;
