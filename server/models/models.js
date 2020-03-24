@@ -40,7 +40,7 @@ schemaModel.pre('save', async function (next){
 
 schemaModel.methods.generateAuthToken = async function(){
   const user = this
-  const token = jwt.sign({_id: user._id}, JWT_KEY)
+  const token = jwt.sign({_id: user._id}, JWT_KEY)  //creating token passing in (obj, jwtkey)
   user.tokens = user.tokens.concat({token})
   await user.save()
   return token
