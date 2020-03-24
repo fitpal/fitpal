@@ -1,0 +1,38 @@
+.login {
+    position: relative;
+    background: url("../../img/login.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: -24px;
+    margin-bottom: -50px;
+
+    .login-h1{
+        text-align: center;
+        text-shadow: 4px 3px 3px #2c2c2cc2
+    }
+
+    .login-inner{
+        padding-top: 190px;
+        color: rgb(241, 240, 240);
+    }
+
+    .form-control{
+        width: 30%;
+        margin: auto;
+    }
+}
+
+.dark_overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
