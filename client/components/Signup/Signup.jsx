@@ -9,7 +9,8 @@ import "./Signup.scss"
 class Signup extends Component {
   constructor(props) {
     super(props)
-    this.handleSignIn = this.handleSignUp.bind(this)
+    //console.log(this.props.action)
+    this.handleSignUp = this.handleSignUp.bind(this)
   }
 
   handleSignUp(e) {
@@ -29,27 +30,30 @@ class Signup extends Component {
       availability
     }
 
-    //  axios.post('/api/signup', { user })
-    //     .then(res => {
-    //       console.log('hello')
-    //       console.log(res.data)
-    //     })
-    //     .catch(error => {
-    //       console.log(error.response)
-    //     })
+     axios.post('/api/signup', user )
+        .then(res => {
+          //console.log('hello')
+          // console.log(`HI ${res}`)
+          // console.log(`PROPS: ${this.props}`)
+          this.props.action(res)
+        })
+        .catch(error => {
+          console.log(`THIS IS THE ERROR ${error.response}`)
+        })
 
-    fetch('/api/signup', {
-      method: 'post', 
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-    .then(response => {
-      response.json().then(body => {
-        console.log(body)
-      })
-    })
+    // fetch('/api/signup', {
+    //   method: 'post', 
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(user)
+    // })
+    // .then(response => {
+    //   response.json().then(body => {
+    //    console.log(body)
+    //    this.props.action(body)
+    //   })
+    // })
 
   }
   render() {

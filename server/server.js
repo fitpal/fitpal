@@ -25,15 +25,15 @@ app.post('/api/signup', middleware.createSignup, (req, res) => {
 // or have .send('signup successful)in middleware.createSignup
 
 app.post('/api/login', middleware.getlogin, (req, res) => {
-  console.log(res);
+  console.log("this is", res.locals.user)
   res.status(200).json(res.locals.user);
 });
 
 //if you are not authenticated, you will get error and not pass to next middleware function which is getResults
 //JWOT allows you to recover the user obj
-app.get('/results', sessionController.authenticate, middleware.getResults, (req, res) => {
+app.post('/api/results', sessionController.authenticate, middleware.getResults, (req, res) => {
   console.log("res works", res.locals.partners);
-  res.status(200).send('results sent!')
+  res.status(200).json(res.locals.partners)
 }); 
 
 app.post('/logout', sessionController.authenticate, middleware.logout);

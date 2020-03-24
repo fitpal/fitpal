@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
+
 
 //SCSS Import
 import './Login.scss';
@@ -7,6 +9,9 @@ import './Login.scss';
 class Login extends Component {
   constructor(props) {
     super(props) 
+    this.state = {
+      isLoggedIn: false
+    }
     this.handleLogIn = this.handleLogIn.bind(this)
   }
 
@@ -20,14 +25,18 @@ class Login extends Component {
       password 
     }
 
-      axios.post('/api/login', user)
-        .then(res => {
-          console.log('hello')
-          console.log(res.data)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
+    axios.post('/api/login', user)
+      .then(res => {
+        console.log('hello')
+        console.log(res)
+        // At this point, we have a token from the backend.
+        // Let's set the client's state to include the token
+        // So that we can pass it to the /api/results request later on.
+        this.props.action(res)
+      })
+      .catch(error => {
+        console.log(`THIS IS THE ERROR: ${error.response}`)
+      })
 
       // fetch('/api/login', { 
       //   method: 'post', 
@@ -42,7 +51,6 @@ class Login extends Component {
       //   )
       // })
   }
-
   render() {
       return(
           <div className="login">
