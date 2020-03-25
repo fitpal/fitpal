@@ -1,5 +1,5 @@
 const KEYS = {
-    JWT_KEY:'KEY'
-}
+  JWT_KEY: 'KEY',
+};
 
-module.exports= KEYS
+module.exports = KEYS;

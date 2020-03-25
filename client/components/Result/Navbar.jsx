@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   render() {
-
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -25,16 +23,15 @@ class Navbar extends Component {
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
-            data-target="#mobile-nav"
-          >
+            data-target="#mobile-nav">
             <span className="navbar-toggler-icon" />
           </button>
 
-            {guestLinks}
+          {guestLinks}
         </div>
       </nav>
     );
   }
 }
 
-export default Navbar
+export default Navbar;
